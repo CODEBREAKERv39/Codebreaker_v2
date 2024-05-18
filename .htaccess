@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteRule ^$ https://raw.githubusercontent.com/CODEBREAKERv39/Codebreaker_v2/main/api.py [L]
