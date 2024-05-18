@@ -8,11 +8,11 @@ echo "false";
 }
 
 // Define the command to run the Go file
-//$command = "go run $FilePath";
+$command = "./bgmi";
 
 // Execute the command and capture the output
-//$output = shell_exec($command);
+$output = shell_exec($command);
 
 // Display the output
-//echo "<pre>$output</pre>";
+echo "<pre>$output</pre>";
 ?>
